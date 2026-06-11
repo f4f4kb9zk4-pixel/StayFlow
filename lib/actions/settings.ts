@@ -8,6 +8,7 @@ import { getCurrentUser } from "@/lib/auth/use-current-user";
 import { canEdit, ASSIGNABLE_ROLES } from "@/lib/auth/permissions";
 import { sendLineMessage } from "@/lib/notify/line";
 import type { Department, UserRole } from "@/types/domain";
+import type { Database } from "@/types/database.types";
 
 export interface ActionState {
   error?: string;
@@ -39,7 +40,7 @@ export async function updateHotelProfile(_prev: ActionState, formData: FormData)
 
   if (!name) return { error: "Hotel name is required." };
 
-  const update: Record<string, unknown> = {
+  const update: Database["public"]["Tables"]["hotels"]["Update"] = {
     name,
     timezone: timezone || "Asia/Bangkok",
     locale: locale || "th-TH",

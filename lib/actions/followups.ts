@@ -21,7 +21,7 @@ export async function createFollowUp(_prev: ActionState, formData: FormData): Pr
   const supabase = await createClient();
 
   const description = String(formData.get("description") ?? "").trim();
-  const department = String(formData.get("department") ?? "") as Department | "";
+  const department = String(formData.get("department") ?? "") as Department | "none" | "";
   const dueAt = String(formData.get("dueAt") ?? "").trim() || null;
   const assigneeId = String(formData.get("assigneeId") ?? "") || null;
   const sourceTable = String(formData.get("sourceTable") ?? "") || null;

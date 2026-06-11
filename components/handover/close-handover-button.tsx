@@ -14,7 +14,11 @@ export function CloseHandoverButton({ handoverId }: { handoverId: string }) {
       variant="outline"
       size="sm"
       disabled={pending}
-      onClick={() => startTransition(() => closeHandover(handoverId))}
+      onClick={() =>
+        startTransition(async () => {
+          await closeHandover(handoverId);
+        })
+      }
     >
       {pending ? "Closing…" : "Close handover"}
     </Button>

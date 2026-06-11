@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getCurrentUser } from "@/lib/auth/use-current-user";
 import { parseVipGuestsPdf, type ParsedVipGuest } from "@/lib/pms/vip-guests-pdf-parser";
 import type { VipTier } from "@/types/domain";
+import type { Database } from "@/types/database.types";
 
 export interface ActionState {
   error?: string;
@@ -137,7 +138,7 @@ export async function upsertVipGuests(
     const existing = existingByKey.get(key);
 
     if (existing) {
-      const updateFields: Record<string, unknown> = {
+      const updateFields: Database["public"]["Tables"]["vip_guests"]["Update"] = {
         room: g.room,
         stay_start: g.stayStart,
         stay_end: g.stayEnd,

@@ -517,7 +517,7 @@ export async function importGuestFeedbackFromPdf(
       .from("incidents")
       .select("id")
       .eq("hotel_id", hotelId)
-      .eq("room", c.room)
+      .eq("room", c.room ?? "")
       .eq("reported_at", reportedAt)
       .maybeSingle();
 

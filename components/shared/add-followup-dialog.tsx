@@ -31,7 +31,7 @@ interface AddFollowUpDialogProps {
   defaultDepartment?: Department;
   triggerLabel?: string;
   triggerVariant?: "default" | "outline" | "secondary" | "ghost";
-  triggerSize?: "default" | "sm";
+  triggerSize?: "md" | "sm";
 }
 
 /**

@@ -383,7 +383,7 @@ function IncidentDetailBody({
           staff={staff}
           sourceTable="incidents"
           sourceId={incident.id}
-          defaultDepartment={incident.department}
+          defaultDepartment={incident.department ?? undefined}
           triggerLabel="Add follow-up"
         />
         <Button type="button" size="sm" variant="outline" onClick={onExportPdf} disabled={exporting}>

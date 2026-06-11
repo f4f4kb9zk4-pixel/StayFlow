@@ -1,12 +1,18 @@
-import { createServerClient } from "@supabase/ssr";
+import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 import type { Database } from "@/types/database.types";
 
 /**
  * Server-side Supabase client for use in Server Components, Server Actions,
  * and Route Handlers. Reads/writes the auth cookie via Next's `cookies()`.
+ *
+ * The explicit `SupabaseClient<Database>` return type + cast works around a
+ * type-resolution mismatch between @supabase/ssr's `createServerClient`
+ * generic signature and the installed @supabase/supabase-js version, which
+ * otherwise causes all `.from(...).select(...)` results to type as `never`.
  */
-export async function createClient() {
+export async function createClient(): Promise<SupabaseClient<Database>> {
   const cookieStore = await cookies();
 
   return createServerClient<Database>(
@@ -17,7 +23,7 @@ export async function createClient() {
         getAll() {
           return cookieStore.getAll();
         },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet: { name: string; value: string; options: CookieOptions }[]) {
           try {
             cookiesToSet.forEach(({ name, value, options }) =>
               cookieStore.set(name, value, options)
@@ -30,5 +36,5 @@ export async function createClient() {
         },
       },
     }
-  );
+  ) as unknown as SupabaseClient<Database>;
 }

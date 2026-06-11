@@ -30,6 +30,7 @@ export interface Database {
           name: string;
         };
         Update: Partial<Database["public"]["Tables"]["organizations"]["Row"]>;
+        Relationships: [];
       };
       hotels: {
         Row: {
@@ -50,6 +51,7 @@ export interface Database {
           slug: string;
         };
         Update: Partial<Database["public"]["Tables"]["hotels"]["Row"]>;
+        Relationships: [];
       };
       hotel_branding: {
         Row: {
@@ -79,6 +81,7 @@ export interface Database {
           hotel_id: string;
         };
         Update: Partial<Database["public"]["Tables"]["hotel_branding"]["Row"]>;
+        Relationships: [];
       };
       profiles: {
         Row: {
@@ -96,6 +99,7 @@ export interface Database {
           full_name: string;
         };
         Update: Partial<Database["public"]["Tables"]["profiles"]["Row"]>;
+        Relationships: [];
       };
       user_hotel_roles: {
         Row: {
@@ -111,6 +115,7 @@ export interface Database {
           role: Database["public"]["Enums"]["user_role"];
         };
         Update: Partial<Database["public"]["Tables"]["user_hotel_roles"]["Row"]>;
+        Relationships: [];
       };
       vip_guests: {
         Row: {
@@ -125,12 +130,14 @@ export interface Database {
           preferences: string | null;
           notes: string | null;
           created_at: string;
+          vip_inhouse: boolean;
         };
         Insert: Partial<Database["public"]["Tables"]["vip_guests"]["Row"]> & {
           hotel_id: string;
           guest_name: string;
         };
         Update: Partial<Database["public"]["Tables"]["vip_guests"]["Row"]>;
+        Relationships: [];
       };
       follow_ups: {
         Row: {
@@ -152,6 +159,7 @@ export interface Database {
           description: string;
         };
         Update: Partial<Database["public"]["Tables"]["follow_ups"]["Row"]>;
+        Relationships: [];
       };
       escalations: {
         Row: {
@@ -174,6 +182,7 @@ export interface Database {
           source_id: string;
         };
         Update: Partial<Database["public"]["Tables"]["escalations"]["Row"]>;
+        Relationships: [];
       };
       guest_cases: {
         Row: {
@@ -200,6 +209,7 @@ export interface Database {
           department: Database["public"]["Enums"]["department"];
         };
         Update: Partial<Database["public"]["Tables"]["guest_cases"]["Row"]>;
+        Relationships: [];
       };
       guest_case_events: {
         Row: {
@@ -214,6 +224,7 @@ export interface Database {
           message: string;
         };
         Update: Partial<Database["public"]["Tables"]["guest_case_events"]["Row"]>;
+        Relationships: [];
       };
       tasks: {
         Row: {
@@ -238,6 +249,7 @@ export interface Database {
           department: Database["public"]["Enums"]["department"];
         };
         Update: Partial<Database["public"]["Tables"]["tasks"]["Row"]>;
+        Relationships: [];
       };
       task_tags: {
         Row: {
@@ -246,6 +258,7 @@ export interface Database {
         };
         Insert: Database["public"]["Tables"]["task_tags"]["Row"];
         Update: Partial<Database["public"]["Tables"]["task_tags"]["Row"]>;
+        Relationships: [];
       };
       shift_handovers: {
         Row: {
@@ -269,6 +282,7 @@ export interface Database {
           handover_time: string;
         };
         Update: Partial<Database["public"]["Tables"]["shift_handovers"]["Row"]>;
+        Relationships: [];
       };
       handover_open_cases: {
         Row: {
@@ -283,6 +297,7 @@ export interface Database {
           reference_label: string;
         };
         Update: Partial<Database["public"]["Tables"]["handover_open_cases"]["Row"]>;
+        Relationships: [];
       };
       handover_followups: {
         Row: {
@@ -298,6 +313,7 @@ export interface Database {
           task: string;
         };
         Update: Partial<Database["public"]["Tables"]["handover_followups"]["Row"]>;
+        Relationships: [];
       };
       handover_department_updates: {
         Row: {
@@ -312,6 +328,7 @@ export interface Database {
           update_text: string;
         };
         Update: Partial<Database["public"]["Tables"]["handover_department_updates"]["Row"]>;
+        Relationships: [];
       };
       arrivals: {
         Row: {
@@ -331,6 +348,14 @@ export interface Database {
           status: Database["public"]["Enums"]["arrival_status"];
           arrival_date: string;
           created_at: string;
+          departure_date: string | null;
+          room_type: string | null;
+          confirmation_number: string | null;
+          nights: number | null;
+          adults: number | null;
+          pms_notes: string | null;
+          vip_arrival: boolean;
+          notes_summary: string | null;
         };
         Insert: Partial<Database["public"]["Tables"]["arrivals"]["Row"]> & {
           arrival_number: string;
@@ -338,6 +363,7 @@ export interface Database {
           guest_name: string;
         };
         Update: Partial<Database["public"]["Tables"]["arrivals"]["Row"]>;
+        Relationships: [];
       };
       incidents: {
         Row: {
@@ -374,6 +400,7 @@ export interface Database {
           title: string;
         };
         Update: Partial<Database["public"]["Tables"]["incidents"]["Row"]>;
+        Relationships: [];
       };
       incident_events: {
         Row: {
@@ -388,6 +415,7 @@ export interface Database {
           message: string;
         };
         Update: Partial<Database["public"]["Tables"]["incident_events"]["Row"]>;
+        Relationships: [];
       };
       notifications: {
         Row: {
@@ -412,6 +440,7 @@ export interface Database {
           title: string;
         };
         Update: Partial<Database["public"]["Tables"]["notifications"]["Row"]>;
+        Relationships: [];
       };
     };
     Views: Record<string, never>;
