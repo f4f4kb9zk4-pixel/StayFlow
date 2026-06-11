@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   StayFlow design tokens (§1.2 / §1.3)
+   These are the SHARED DEFAULTS — a per-hotel `hotel_branding` row can
+   override the subset of variables it controls (primary/secondary/accent/
+   background/surface/sidebar colors, fonts, radius, mode) via an inline
+   <style> block injected by lib/branding/theme-provider.tsx in the root
+   layout. Components must only ever reference these variables, never
+   hardcoded colors, so branding overrides "just work". (§2.7)
+   ========================================================================= */
+
+:root {
+  /* Base surfaces */
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
+
+  /* Brand */
+  --primary: #d4af37;
+  --primary-foreground: #0f172a;
+  --accent: #d4af37;
+  --accent-foreground: #0f172a;
+  --ring: #d4af37;
+
+  /* Secondary / muted */
+  --secondary: #334155;
+  --secondary-foreground: #f8fafc;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+
+  /* Status */
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --info: #3b82f6;
+
+  /* Borders / inputs */
+  --border: #ffffff14;
+  --input: #334155;
+  --input-background: #1e293b;
+
+  /* Sidebar */
+  --sidebar: #0b1120;
+  --sidebar-border: #ffffff0f;
+  --sidebar-foreground: #f8fafc;
+
+  /* Gold accents */
+  --gold-dim: #d4af3726;
+  --gold-border: #d4af374d;
+
+  /* Layered surfaces */
+  --navy: #0f172a;
+  --navy-light: #1e293b;
+  --navy-mid: #334155;
+
+  /* Charts (reserved for optional future "Insights" tab — §0.1) */
+  --chart-1: #d4af37;
+  --chart-2: #22c55e;
+  --chart-3: #3b82f6;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+
+  /* Shape */
+  --radius: 0.5rem;
+
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+/* The source ships dark-mode-first; .dark mirrors :root. */
+.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
+  --primary: #d4af37;
+  --primary-foreground: #0f172a;
+  --accent: #d4af37;
+  --accent-foreground: #0f172a;
+  --ring: #d4af37;
+  --secondary: #334155;
+  --secondary-foreground: #f8fafc;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --info: #3b82f6;
+  --border: #ffffff14;
+  --input: #334155;
+  --input-background: #1e293b;
+  --sidebar: #0b1120;
+  --sidebar-border: #ffffff0f;
+  --sidebar-foreground: #f8fafc;
+  --gold-dim: #d4af3726;
+  --gold-border: #d4af374d;
+  --navy: #0f172a;
+  --navy-light: #1e293b;
+  --navy-mid: #334155;
+}
+
+/* Optional light theme — used by hotel branding presets that default to
+   light mode (e.g. Business Hotel, Modern Lifestyle — §2.7). Hotels using
+   these presets will have hotel_branding override most of these anyway, but
+   this gives a sane baseline for `default_theme_mode = 'light'`. */
+.light {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #2563eb;
+  --primary-foreground: #f8fafc;
+  --accent: #2563eb;
+  --accent-foreground: #f8fafc;
+  --ring: #2563eb;
+  --secondary: #e2e8f0;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --danger: #ef4444;
+  --success: #16a34a;
+  --warning: #d97706;
+  --info: #0ea5e9;
+  --border: #0f172a14;
+  --input: #e2e8f0;
+  --input-background: #ffffff;
+  --sidebar: #ffffff;
+  --sidebar-border: #0f172a0f;
+  --sidebar-foreground: #0f172a;
+  --gold-dim: #2563eb1a;
+  --gold-border: #2563eb4d;
+  --navy: #f8fafc;
+  --navy-light: #ffffff;
+  --navy-mid: #e2e8f0;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-size: 15px;
+  }
+
+  h1 {
+    @apply text-2xl font-semibold tracking-tight;
+    line-height: 1.3;
+  }
+
+  h2 {
+    @apply text-xl font-semibold;
+    line-height: 1.3;
+  }
+
+  h3 {
+    @apply text-lg font-medium;
+    line-height: 1.4;
+  }
+
+  h4 {
+    @apply text-base font-medium;
+    line-height: 1.5;
+  }
+}
+
+@layer utilities {
+  /* Mono treatment for IDs, timestamps, room numbers, metrics (§1.3) */
+  .font-data {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Hide scrollbar for kanban swimlanes / horizontal scrollers on mobile */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
